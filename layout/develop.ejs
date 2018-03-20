@@ -1,0 +1,43 @@
+<div id="article-banner">
+  <h2>Develop</h2>
+  <p class="post-date">초보 개발자가 쓴 개발</p>
+</div>
+<main class="app-body">
+  <div class="articles">
+    <% site.categories.map(function(category, index) { %>
+      <% if (category.name == 'Develop') { %>
+        <% category.posts.map(function(post) { %>
+          <div>
+            <h2 class="article-head">
+              <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+            </h2>
+          </div>
+          <p class="article-date"><%- date(post.date, "LL") %></p>
+          <% if (post.tags && post.tags.length) { %>
+          <%- partial('_partial/tag', { tags: post.tags }) %>
+          <% } %>
+          <div class="article-summary">
+            <% if (post.excerpt) { %>
+            <%- post.excerpt %>
+            <% } else { %>
+            <%- truncate(strip_html(post.content), { length: 150, omission: ' ...' }) %>
+            <% } %>
+          </div>
+          <a class="more" href="<%- url_for(post.path) %>"><%- theme.excerpt_link %></a>
+          </article>
+        <% }) %>
+      <% } %>
+    <% }) %>
+
+    <% if (site.pages.length > 1){ %>
+    <%- partial('_partial/pager') %>
+    <% } %>
+  </div>
+</main>
+<script>
+  (function() {
+    var url = '<%= config.url %>/<%= page.path %>';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header')
+  })()
+</script>

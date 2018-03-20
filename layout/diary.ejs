@@ -1,0 +1,88 @@
+<div id="article-banner">
+  <h2>Diary</h2>
+  <p class="post-date">학부생의 넋두리</p>
+</div>
+<main class="app-body">
+  <div class="articles">
+    <% site.categories.map(function(category, index) { %>
+    <% if (category.name == 'Diary') { %>
+    <% category.posts.map(function(post) { %>
+    <div>
+      <h2 class="article-head">
+        <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+      </h2>
+    </div>
+    <p class="article-date"><%- date(post.date, "LL") %></p>
+    <% if (post.tags && post.tags.length) { %>
+    <%- partial('_partial/tag', { tags: post.tags }) %>
+    <% } %>
+    <div class="article-summary">
+      <% if (post.excerpt) { %>
+      <%- post.excerpt %>
+      <% } else { %>
+      <%- truncate(strip_html(post.content), { length: 150, omission: ' ...' }) %>
+      <% } %>
+    </div>
+    <a class="more" href="<%- url_for(post.path) %>"><%- theme.excerpt_link %></a>
+    </article>
+    <% }) %>
+    <% } %>
+    <% }) %>
+
+    <% if (site.pages.length > 1){ %>
+    <%- partial('_partial/pager') %>
+    <% } %>
+  </div>
+</main>
+<script>
+  (function() {
+    var url = '<%= config.url %>/<%= page.path %>';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header')
+    $.ajax({
+      headers: {
+        Accept: 'application/vnd.github.v3.raw'
+      },
+      type: 'get',
+      url: 'https://api.github.com/users/<%= theme.about.github_username %>/repos',
+      success: function (data) {
+        var repos = data.sort(function(a, b) {
+          return (b.stargazers_count - a.stargazers_count)
+        }).slice(0, 6)
+        var cardHtml = repos.map(function(item) {
+          var description = item.description || ""
+          if (description.replace(/[\u0391-\uFFE5]/g, "aa").length > 72) {
+            description = description.slice(0, 72) + '...'
+          }
+          return (
+              '<section class="project-card">' +
+              '<a class="card-wrap" href="'+ item.html_url +'" target="_blank">' +
+              '<div class="card-header" data-name="'+ item.name +'"></div>' +
+              '<h3 class="card-title">' + item.name + '</h3>' +
+              '<p class="card-description">' + description + '</p>' +
+              '<div class="card-footer">' +
+              '<span><i class="fa fa-star"></i>'+ item.stargazers_count +'</span>' +
+              '<span><i class="fa fa-code-fork"></i>' + item.forks_count +'</span>' +
+              '</div>' +
+              '</a>' +
+              '</section>'
+          )
+        }).join('')
+        $('#all-project').html(cardHtml)
+        $('.card-header').each(function() {
+          var name = $(this).data('name');
+          $(this).geopattern(name);
+        })
+      }
+    });
+  })()
+</script>
+
+
+<script>
+  (function () {
+    var url = '<%= config.url %>/<%= page.path %>'
+    $('#article-banner').geopattern(url)
+    $('.header').removeClass('fixed-header')
+  })();
+</script>

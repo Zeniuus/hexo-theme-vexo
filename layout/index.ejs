@@ -1,26 +1,45 @@
+<div id="article-banner">
+  <h2>아놔 제목 뭘로하지</h2>
+  <p class="post-date">한 학부생의 일기장</p>
+</div>
 <main class="app-body">
-  <% page.posts.each(function(post) { %>
+  <h1 class="blog-title">Recent Posts</h1>
+  <div class="articles">
+    <% page.posts.each(function(post) { %>
     <article class="article-card">
-      <h2 class="article-head">
-        <a href="<%- url_for(post.path) %>"><%- post.title %></a>
-      </h2>
+      <div>
+        <h2 class="article-head">
+          <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+        </h2>
+        <% post.categories.each(function(category) { %>
+          <span class="article-category"><%= category.name %></span>
+        <% }) %>
+      </div>
       <p class="article-date"><%- date(post.date, "LL") %></p>
       <% if (post.tags && post.tags.length) { %>
-        <%- partial('_partial/tag', { tags: post.tags }) %>
+      <%- partial('_partial/tag', { tags: post.tags }) %>
       <% } %>
       <div class="article-summary">
         <% if (post.excerpt) { %>
-          <%- post.excerpt %>
+        <%- post.excerpt %>
         <% } else { %>
-          <%- truncate(strip_html(post.content), { length: 150, omission: ' ...' }) %>
+        <%- truncate(strip_html(post.content), { length: 150, omission: ' ...' }) %>
         <% } %>
       </div>
       <a class="more" href="<%- url_for(post.path) %>"><%- theme.excerpt_link %></a>
     </article>
-  <% }) %>
+    <% }) %>
 
-  <% if (page.total > 1){ %>
+    <% if (page.total > 1){ %>
     <%- partial('_partial/pager') %>
-  <% } %>
+    <% } %>
+  </div>
 </main>
+<script>
+  (function() {
+    var url = '<%= config.url %>/<%= page.path %>';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header')
+  })()
+</script>
 

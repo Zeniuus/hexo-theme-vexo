@@ -20,46 +20,20 @@
     <!-- NAV START -->
     <%- partial('_partial/nav') %>
     <!-- NAV END -->
-    <!-- 打赏 START -->
-    <% if (theme.donate) { %>
-      <div class="money-like">
-        <div class="reward-btn">
-          赏
-          <span class="money-code">
-            <span class="alipay-code">
-              <div class="code-image"></div>
-              <b>使用支付宝打赏</b>
-            </span>
-            <span class="wechat-code">
-              <div class="code-image"></div>
-              <b>使用微信打赏</b>
-            </span>
-          </span>
-        </div>
-        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
-      </div>
-    <% } %>
-    <!-- 打赏 END -->
-    <!-- 二维码 START -->
-    <% if (theme.qrcode) { %>
-      <div class="qrcode">
-        <canvas id="share-qrcode"></canvas>
-        <p class="notice">扫描二维码，分享此文章</p>
-      </div>
-    <% } %>
-    <!-- 二维码 END -->
-    <% if (theme.comment === 'gitment') { %>
-      <!-- Gitment START -->
-      <div id="comments"></div>
-      <!-- Gitment END -->
-    <% } else if (theme.comment === 'uyan') { %>
-      <!-- UY START -->
-      <div id="uyan_frame"></div>
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
-      <!-- UY END -->
-    <% } else { %>
-      <!-- No Comment -->
-    <% } %>
+    <!--COMMENT START-->
+    <!--<% if (theme.comment === 'gitment') { %>-->
+      <!--&lt;!&ndash; Gitment START &ndash;&gt;-->
+      <!--<div id="comments"></div>-->
+      <!--&lt;!&ndash; Gitment END &ndash;&gt;-->
+    <!--<% } else if (theme.comment === 'uyan') { %>-->
+      <!--&lt;!&ndash; UY START &ndash;&gt;-->
+      <!--<div id="uyan_frame"></div>-->
+      <!--<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>-->
+      <!--&lt;!&ndash; UY END &ndash;&gt;-->
+    <!--<% } else { %>-->
+      <!--&lt;!&ndash; No Comment &ndash;&gt;-->
+    <!--<% } %>-->
+    <!--COMMENT END-->
   </article>
   <!-- Article END -->
   <!-- Catalog START -->
@@ -116,12 +90,6 @@
         })
       }
     })
-
-    // qrcode
-    var qr = new QRious({
-      element: document.getElementById('share-qrcode'),
-      value: document.location.href
-    });
 
     // gitment
     var gitmentConfig = "<%= theme['gitment_owner'] %>";
