@@ -29,10 +29,6 @@
       <a class="more" href="<%- url_for(post.path) %>"><%- theme.excerpt_link %></a>
     </article>
     <% }) %>
-
-    <% if (page.total > 1){ %>
-    <%- partial('_partial/pager') %>
-    <% } %>
   </div>
 </main>
 <script>
