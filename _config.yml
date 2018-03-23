@@ -46,6 +46,50 @@ about:
   description: "Software Developer"
   github_username: Zeniuus
 
+experience:
+  Classum:
+    period: Mar. 2018 ~ Current
+    position: Backend Developer
+    description:
+      - Firebase functions with TypeScript
+  SPARCS:
+    period: Mar. 2017 ~ Current
+    position: Developer
+    description:
+      - Product manager of several projects (Zabo, newAra)
+      - Git, Node.js, JavaScript seminars
+  Lendit:
+    period: Jan. 2018 ~ Feb. 2018
+    position: Developer Intern
+    description:
+      - Several tools used internally
+      - Code snippet manager
+  KIXLAB:
+    period: Jul. 2017 ~ Aug. 2018
+    position: Research Intern
+    description:
+      - Asynchronous-interactive feedback interface
+
+skill:
+  Frontend:
+    Vue.js: Intermediate
+  Backend:
+    Node.js: Beginner ~ Intermediate
+    MongoDB: Beginner
+    Spring Boot: Beginner
+    Django: Beginner
+  Language:
+    JavaScript: Intermediate
+    TypeScript: Beginner
+    Java: Beginner
+    Python: Beginner
+  Else:
+    AWS: Once
+
+education: placeholder
+
+projects: placeholder
+
 # MathJax Support
 mathjax:
   enable: true
