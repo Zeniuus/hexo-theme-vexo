@@ -4,9 +4,10 @@
 </div>
 <main class="app-body">
   <div class="articles">
+    <% function postSortFunc(post1, post2) { if (post1.date < post2.date) return 1; return -1;} %>
     <% site.categories.map(function(category, index) { %>
     <% if (category.name == 'Diary') { %>
-    <% category.posts.map(function(post) { %>
+    <% category.posts.data.sort(postSortFunc).map(function(post) { %>
     <div>
       <h2 class="article-head">
         <a href="<%- url_for(post.path) %>"><%- post.title %></a>
