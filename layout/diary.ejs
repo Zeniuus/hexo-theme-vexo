@@ -8,23 +8,24 @@
     <% site.categories.map(function(category, index) { %>
     <% if (category.name == 'Diary') { %>
     <% category.posts.data.sort(postSortFunc).map(function(post) { %>
-    <div>
-      <h2 class="article-head">
-        <a href="<%- url_for(post.path) %>"><%- post.title %></a>
-      </h2>
-    </div>
-    <p class="article-date"><%- date(post.date, "LL") %></p>
-    <% if (post.tags && post.tags.length) { %>
-    <%- partial('_partial/tag', { tags: post.tags }) %>
-    <% } %>
-    <div class="article-summary">
-      <% if (post.excerpt) { %>
-      <%- post.excerpt %>
-      <% } else { %>
-      <%- truncate(strip_html(post.content), { length: 150, omission: ' ...' }) %>
-      <% } %>
-    </div>
-    <a class="more" href="<%- url_for(post.path) %>"><%- theme.excerpt_link %></a>
+    <article class="<%- post.tags.some(tag => tag.name === 'Private') ? 'private' : '' %>">
+      <div>
+        <h2 class="article-head">
+          <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+        </h2>
+      </div>
+      <p class="article-date"><%- date(post.date, "LL") %></p>
+      <!-- <% if (post.tags && post.tags.length) { %>
+      <%- partial('_partial/tag', { tags: post.tags }) %>
+      <% } %> -->
+      <div class="article-summary">
+        <% if (post.excerpt) { %>
+        <%- post.excerpt %>
+        <% } else { %>
+        <%- truncate(strip_html(post.content), { length: 150, omission: ' ...' }) %>
+        <% } %>
+      </div>
+      <a class="more" href="<%- url_for(post.path) %>"><%- theme.excerpt_link %></a>
     </article>
     <% }) %>
     <% } %>
@@ -35,6 +36,15 @@
     <% } %>
   </div>
 </main>
+<script type="text/javascript">
+  const isPrivate = localStorage.getItem('private');
+  if (isPrivate) {
+    const privatePosts = document.getElementsByClassName('private');
+    for (let i = 0; i < privatePosts.length; i++) {
+        privatePosts[i].style.display = 'block';
+    }
+  }
+</script>
 <script>
   (function() {
     var url = '<%= config.url %>/<%= page.path %>';
