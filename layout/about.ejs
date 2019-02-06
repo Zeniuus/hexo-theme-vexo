@@ -24,57 +24,7 @@
     <% } %>
   </section>
 </div>
-<div class="cv-container">
-  <h1 class="cv-title">Experiences</h1>
-  <div class="experiences container">
-    <% for (const location in theme.experience) { %>
-    <% const experience = theme.experience[location] %>
-    <div class="experiences-item">
-      <div class="experiences-header">
-        <h2 class="experiences-title"><%= location %></h2>
-        <span class="experiences-period"><%= experience.period %></span>
-      </div>
-      <span class="experiences-position"><%= experience.position %></span>
-      <div>
-        <% for (const i in experience.description) { %>
-        <p class="experiences-description">- <%= experience.description[i] %></p>
-        <% } %>
-      </div>
-    </div>
-    <% } %>
-  </div>
-  <hr />
-  <h1 class="cv-title">Skills</h1>
-  <div class="skills container">
-    <% for (const skillType in theme.skill) { %>
-    <div class="skills">
-      <h2 class="skills-type"><%= skillType %></h2>
-      <div class="skills-list">
-        <div class="skills-column">
-          <% for (const skill in theme.skill[skillType]) { %>
-          <% if (Object.keys(theme.skill[skillType]).indexOf(skill) % 2 === 0) { %>
-          <div class="skills-item">
-            <h3 class="skills-name"><%= skill %></h3>
-            <span class="skills-level"><%= theme.skill[skillType][skill] %></span>
-          </div>
-          <% } %>
-          <% } %>
-        </div>
-        <div class="skills-column">
-          <% for (const skill in theme.skill[skillType]) { %>
-          <% if (Object.keys(theme.skill[skillType]).indexOf(skill) % 2 === 1) { %>
-          <div class="skills-item">
-            <h3 class="skills-name"><%= skill %></h3>
-            <span class="skills-level"><%= theme.skill[skillType][skill] %></span>
-          </div>
-          <% } %>
-          <% } %>
-        </div>
-      </div>
-    </div>
-    <% } %>
-  </div>
-</div>
+
 
 <script>
   (function () {
