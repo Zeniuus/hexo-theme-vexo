@@ -11,6 +11,7 @@
       margin: 2px 0
   p
     line-height: 1.6em
+    margin-bottom: 15px
     code
       background-color: color-background
       color: color-orange
@@ -46,16 +47,24 @@
     background: color-background
     border-bottom-right-radius: 2px
     border-top-right-radius: 2px
+    &>p
+      margin: 0
   ul, ol
     overflow: auto
     margin: 15px 0
     li
       padding: 5px 0
+  li > ul, li > ol
+    margin: 5px 0 0
   img
     max-width: 100%
     display: block
-    margin: 20px auto
+    margin: 20px auto 0
     cursor: zoom-in
+  .image-caption
+    display: block
+    text-align: center
+    font-size: 0.9em
   figure
     background: color-background
     padding: 0 10px
